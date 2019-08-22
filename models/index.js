@@ -1,1 +1,1 @@
-require('Templates');
+require('./Inventory');
