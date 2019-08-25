@@ -21,9 +21,6 @@ exports.checkList = async function (req, res, next) {
         req.body.p_info_list = [];
     }
 
-    // Reset temp = 0
-    await Inventory.updateMany( {state: 1}, {temp: 0} );
-
     for (let p_info of req.body.p_info_list)
     {
         var inventorys = await Inventory.findOneAndUpdate( {state: 1, temp: 0, p_info: p_info}, {temp: 1} ).exec();
@@ -33,6 +30,9 @@ exports.checkList = async function (req, res, next) {
         else 
             results.push(false); 
     }
+
+    // Reset temp = 0
+    await Inventory.updateMany( {state: 1}, {temp: 0} );
 
     return res.json({
         results: results
