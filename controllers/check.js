@@ -5,9 +5,9 @@ exports.check = async function (req, res, next) {
     var result = await Inventory.findOne( {state: 1, temp: 0, p_info: req.body.p_info} ).exec();
 
     if (result) 
-        { result = true; }
+        result = true;
     else 
-        { result = false; }
+        result = false;
 
     return res.json({
         result: result
